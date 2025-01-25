@@ -43,8 +43,4 @@ public class Aresta implements Comparable<Aresta>{
 	public void setPeso(int peso) {
 		this.peso = peso;
 	}
-	
-	
-	
-	
 }

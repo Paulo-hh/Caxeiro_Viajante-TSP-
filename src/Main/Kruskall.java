@@ -7,23 +7,21 @@ import java.util.List;
 
 public class Kruskall {
 	// Method to find the parent of a node in the disjoint set
-	private int findParent(int[] parent, int i) {
-		if (parent[i] == -1)
+	private int encontrarNodo(int[] nodo, int i) {
+		if (nodo[i] == -1)
 			return i;
-		return findParent(parent, parent[i]);
+		return encontrarNodo(nodo, nodo[i]);
 	}
 
-	// Method to perform union of two subsets
-	private void union(int[] parent, int x, int y) {
-		int xSet = findParent(parent, x);
-		int ySet = findParent(parent, y);
-		parent[xSet] = ySet;
+	private void unir(int[] nodo, int x, int y) {
+		int a = encontrarNodo(nodo, x);
+		int b = encontrarNodo(nodo, y);
+		nodo[a] = b;
 	}
 
-	// Method to find the Minimum Spanning Tree (MST) using Kruskal's algorithm
-	public Integer[][] findMST(Integer[][] matriz) {
 
-		Integer[][] MST = new Integer[matriz.length][matriz.length];
+	public Integer[][] encontrarMST(Integer[][] matriz) {
+
 		List<Aresta> arestas = new ArrayList<>();
 
 		for (int i = 0; i < matriz.length; i++) {
@@ -34,31 +32,31 @@ public class Kruskall {
 			}
 		}
 
-		List<Aresta> result = new ArrayList<>();
-		int[] parent = new int[matriz.length];
-		Arrays.fill(parent, -1);
+		List<Aresta> resultado = new ArrayList<>();
+		int[] nodos = new int[matriz.length];
+		Arrays.fill(nodos, -1);
 
 		// Sort all the edges based on their weight
 		Collections.sort(arestas);
-		int edgeCount = 0;
-		int index = 0;
+		int contarArestas = 0;
+		int indice = 0;
 
 		// Iterate through sorted edges and add
 		// them to the MST if they don't form a cycle
-		while (edgeCount < matriz.length - 1) {
-			Aresta nextEdge = arestas.get(index++);
-			int x = findParent(parent, nextEdge.getAtual());
-			int y = findParent(parent, nextEdge.getProximo());
+		while (contarArestas < matriz.length - 1) {
+			Aresta proximaAresta = arestas.get(indice++);
+			int x = encontrarNodo(nodos, proximaAresta.getAtual());
+			int y = encontrarNodo(nodos, proximaAresta.getProximo());
 
 			// If including this edge doesn't cause a cycle,
 			// include it in the result
 			if (x != y) {
-				result.add(nextEdge);
-				union(parent, x, y);
-				edgeCount++;
+				resultado.add(proximaAresta);
+				unir(nodos, x, y);
+				contarArestas++;
 			}
 		}
-		return caminhoParaMatriz(result, matriz.length);
+		return caminhoParaMatriz(resultado, matriz.length);
 	}
 
 	//um metodo que retorna uma matriz contendo o resultado
