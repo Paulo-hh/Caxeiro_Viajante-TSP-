@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Kruskall {
-	// Method to find the parent of a node in the disjoint set
 	private int encontrarNodo(int[] nodo, int i) {
 		if (nodo[i] == -1)
 			return i;
@@ -36,20 +35,15 @@ public class Kruskall {
 		int[] nodos = new int[matriz.length];
 		Arrays.fill(nodos, -1);
 
-		// Sort all the edges based on their weight
 		Collections.sort(arestas);
 		int contarArestas = 0;
 		int indice = 0;
 
-		// Iterate through sorted edges and add
-		// them to the MST if they don't form a cycle
 		while (contarArestas < matriz.length - 1) {
 			Aresta proximaAresta = arestas.get(indice++);
 			int x = encontrarNodo(nodos, proximaAresta.getAtual());
 			int y = encontrarNodo(nodos, proximaAresta.getProximo());
 
-			// If including this edge doesn't cause a cycle,
-			// include it in the result
 			if (x != y) {
 				resultado.add(proximaAresta);
 				unir(nodos, x, y);
@@ -59,7 +53,6 @@ public class Kruskall {
 		return caminhoParaMatriz(resultado, matriz.length);
 	}
 
-	//um metodo que retorna uma matriz contendo o resultado
 	public Integer[][] caminhoParaMatriz(List<Aresta> resultado, int n) {
 		Integer[][] MST = new Integer[n][n];
 		for (int i = 0; i < n; i++) {
