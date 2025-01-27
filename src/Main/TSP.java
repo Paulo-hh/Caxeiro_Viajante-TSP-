@@ -12,6 +12,7 @@ import java.util.Set;
 public class TSP {
 
 	public static void main(String[] args) {
+		// Coloque aqui o caminho dos arquivos da matriz de adjacencia
 		String[] arquivos = { "C:\\Arquivos\\tsp1_253.txt", "C:\\Arquivos\\tsp2_1248.txt",
 				"C:\\Arquivos\\tsp3_1194.txt", "C:\\Arquivos\\tsp4_7013.txt", "C:\\Arquivos\\tsp5_27603.txt" };
 
